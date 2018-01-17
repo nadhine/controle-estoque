@@ -13,6 +13,7 @@ if(isset($_POST['btn-signup']))
 	$uname = strip_tags($_POST['txt_uname']);
 	$umail = strip_tags($_POST['txt_umail']);
 	$upass = strip_tags($_POST['txt_upass']);
+	$ureg = strip_tags($_POST['txt_ureg']);
 
 	if($uname=="")	{
 		$error[] = "Cadastre um nome de usuário!";
@@ -29,12 +30,15 @@ if(isset($_POST['btn-signup']))
 	else if(strlen($upass) < 6){
 		$error[] = "Sua senha deve ter pelo menos seis caracteres";
 	}
+	else if($ureg=="")	{
+		$error[] = "Cadastre uma matrícula";
+	}
 	else
 	{
 		try
 		{
-			$stmt = $user->runQuery("SELECT user_name, user_email FROM users WHERE user_name=:uname OR user_email=:umail");
-			$stmt->execute(array(':uname'=>$uname, ':umail'=>$umail));
+			$stmt = $user->runQuery("SELECT user_name, user_email, user_registration FROM users WHERE user_name=:uname OR user_email=:umail OR user_registration=:ureg");
+			$stmt->execute(array(':uname'=>$uname, ':umail'=>$umail, ':ureg'=>$ureg));
 			$row=$stmt->fetch(PDO::FETCH_ASSOC);
 
 			if($row['user_name']==$uname) {
@@ -43,9 +47,12 @@ if(isset($_POST['btn-signup']))
 			else if($row['user_email']==$umail) {
 				$error[] = "Desculpe, email já cadastrado";
 			}
+			else if($row['user_registration']==$ureg) {
+				$error[] = "Desculpe, matrícula já cadastrada";
+			}
 			else
 			{
-				if($user->register($uname,$umail,$upass)){
+				if($user->register($uname,$umail,$upass,$ureg)){
 					$user->redirect('sign-up.php?joined');
 				}
 			}
@@ -105,6 +112,9 @@ if(isset($_POST['btn-signup']))
             <div class="form-group">
             	<input type="password" class="form-control" name="txt_upass" placeholder="Senha" />
             </div>
+						<div class="form-group">
+						<input type="text" class="form-control" name="txt_ureg" placeholder="Matrícula" value="<?php if(isset($error)){echo $ureg;}?>" />
+						</div>
             <div class="clearfix"></div><hr />
             <div class="form-group">
             	<button type="submit" class="btn btn-primary" name="btn-signup">
