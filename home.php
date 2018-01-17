@@ -49,7 +49,7 @@
 
     <div class="tab-pane active" id="produtos">
 			<div class="embed-responsive embed-responsive-16by9">
-			    <iframe class="embed-responsive-item" src="newproduct.php" allowfullscreen></iframe>
+			    <iframe class="embed-responsive-item" src="products.php" allowfullscreen></iframe>
 			</div>
     </div>
 
