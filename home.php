@@ -22,7 +22,7 @@
 <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
 <script type="text/javascript" src="jquery-1.11.3-jquery.min.js"></script>
 <link rel="stylesheet" href="style.css" type="text/css"  />
-<title>Bem vindo, - <?php print($userRow['user_email']); ?></title>
+<title>Bem vindo, - <?php print($userRow['user_name']); ?></title>
 </head>
 
 <body>
@@ -32,7 +32,7 @@
           <ul class="nav nav-tabs">
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-				<span class="glyphicon glyphicon-user"></span>&nbsp;Olá,  <?php echo $userRow['user_email']; ?>&nbsp;<span class="caret"></span></a>
+				<span class="glyphicon glyphicon-user"></span>&nbsp;Olá,  <?php echo $userRow['user_name']; ?>&nbsp;<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="profile.php"><span class="glyphicon glyphicon-user"></span>&nbsp;Ver Perfil</a></li>
 								<li><a href="logout.php?logout=true"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Sair</a></li>

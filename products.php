@@ -8,7 +8,7 @@
 <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
 <script type="text/javascript" src="jquery-1.11.3-jquery.min.js"></script>
 <link rel="stylesheet" href="style.css" type="text/css"  />
-<title>Bem vindo, - <?php print($userRow['user_email']); ?></title>
+<title>Bem vindo, - <?php print($userRow['user_name']); ?></title>
 
 </head>
 
@@ -24,7 +24,7 @@
 }
 </script>
 
-  <button type="submit" class="btn btn-primary" name="btn-signup" onclick="Mudarestado('novoproduto')" href="#novoproduto>
+  <button type="submit" class="btn btn-primary" name="btn-signup" onclick="Mudarestado('novoproduto')" href="#novoproduto">
       <i class="glyphicon glyphicon-open-file"></i>&nbsp;Novo Produto
     </button>
     <div class="tab-pane active" id="novoproduto" style="display:none">

@@ -26,12 +26,18 @@ if(isset($_POST['btn-signup']))
 	{
 		try
 		{
-			$stmt = $product->runQuery("SELECT product_name, product_valor, product_unit, product_provider FROM products WHERE product_name=:pname OR user_email=:umail OR user_registration=:ureg");
+			$stmt = $product->runQuery("SELECT product_name, product_valor, product_unit, product_provider FROM products WHERE product_name=:pname");
 			$stmt->execute(array(':pname'=>$pname, ':pvalor'=>$pvalor, ':punit'=>$punit, ':pprovider'=>$pprovider));
 			$row=$stmt->fetch(PDO::FETCH_ASSOC);
-			if($product->register($pname,$pvalor,$punit,$pprovider)){
-					$product->redirect('newproduct.php?joined');
+			print($row['product_name']);
+			if($row['product_name']==$pname){
+				$error[] = "Desculpe, esse produto já foi cadastrado";
+			}
+			else{
+				if($product->register($pname,$pvalor,$punit,$pprovider)){
+						$product->redirect('newproduct.php?joined');
 				}
+			}
 
 		}
 		catch(PDOException $e)
