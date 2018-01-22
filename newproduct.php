@@ -89,16 +89,16 @@ if(isset($_POST['btn-signup']))
   			}
   			?>
               <div class="form-group">
-              <input type="text" class="form-control" name="txt_pname" placeholder="Descrição do Produto" value="<?php if(isset($error)){echo $uname;}?>" />
+              <input type="text" class="form-control" name="txt_pname" placeholder="Descrição do Produto" value="<?php if(isset($error)){echo $pname;}?>" />
               </div>
               <div class="form-group">
-              <input type="text" class="form-control" name="txt_pvalor" placeholder="Preço" value="<?php if(isset($error)){echo $umail;}?>" />
+              <input type="text" class="form-control" name="txt_pvalor" placeholder="Preço" value="<?php if(isset($error)){echo $pvalor;}?>" />
               </div>
               <div class="form-group">
-              	<input type="text" class="form-control" name="txt_punit" placeholder="Unidade" />
+              	<input type="text" class="form-control" name="txt_punit" placeholder="Unidade" value="<?php if(isset($error)){echo $punit;}?>"/>
               </div>
   						<div class="form-group">
-  						<input type="text" class="form-control" name="txt_pprovider" placeholder="Fornecedor" value="<?php if(isset($error)){echo $ureg;}?>" />
+  						<input type="text" class="form-control" name="txt_pprovider" placeholder="Fornecedor" value="<?php if(isset($error)){echo $pprovider;}?>" />
   						</div>
               <div class="clearfix"></div><hr />
               <div class="form-group">
