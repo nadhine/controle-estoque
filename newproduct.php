@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('class.product.php');
+
 $product = new PRODUCT();
 
 if(isset($_POST['btn-signup']))
@@ -29,7 +30,7 @@ if(isset($_POST['btn-signup']))
 			$stmt = $product->runQuery("SELECT product_name, product_valor, product_unit, product_provider FROM products WHERE product_name=:pname");
 			$stmt->execute(array(':pname'=>$pname, ':pvalor'=>$pvalor, ':punit'=>$punit, ':pprovider'=>$pprovider));
 			$row=$stmt->fetch(PDO::FETCH_ASSOC);
-			print($row['product_name']);
+
 			if($row['product_name']==$pname){
 				$error[] = "Desculpe, esse produto já foi cadastrado";
 			}
@@ -56,7 +57,7 @@ if(isset($_POST['btn-signup']))
 <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
 <script type="text/javascript" src="jquery-1.11.3-jquery.min.js"></script>
 <link rel="stylesheet" href="style.css" type="text/css"  />
-<title>Bem vindo, - <?php print($userRow['user_email']); ?></title>
+
 </head>
 
 <body>
@@ -67,27 +68,27 @@ if(isset($_POST['btn-signup']))
 
           <form method="post" class="form-signin">
               <h2 class="form-signin-heading">Novo Produto</h2><hr />
-              <?php
+<?php
   			if(isset($error))
   			{
   			 	foreach($error as $error)
   			 	{
-  					 ?>
+?>
                        <div class="alert alert-danger">
                           <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $error; ?>
                        </div>
-                       <?php
+<?php
   				}
   			}
   			else if(isset($_GET['joined']))
   			{
-  				 ?>
+?>
                    <div class="alert alert-info">
                         <i class="glyphicon glyphicon-log-in"></i> &nbsp; Cadastro realizado com sucesso <a href='index.php'>Voltar</a>
                    </div>
-                   <?php
+<?php
   			}
-  			?>
+?>
               <div class="form-group">
               <input type="text" class="form-control" name="txt_pname" placeholder="Descrição do Produto" value="<?php if(isset($error)){echo $pname;}?>" />
               </div>
