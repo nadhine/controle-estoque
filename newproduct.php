@@ -28,7 +28,7 @@ if(isset($_POST['btn-signup']))
 		try
 		{
 			$stmt = $product->runQuery("SELECT product_name, product_valor, product_unit, product_provider FROM products WHERE product_name=:pname");
-			$stmt->execute(array(':pname'=>$pname, ':pvalor'=>$pvalor, ':punit'=>$punit, ':pprovider'=>$pprovider));
+			$stmt->execute(array(':pname'=>$pname));
 			$row=$stmt->fetch(PDO::FETCH_ASSOC);
 
 			if($row['product_name']==$pname){
@@ -36,7 +36,6 @@ if(isset($_POST['btn-signup']))
 			}
 			else{
 				if($product->register($pname,$pvalor,$punit,$pprovider)){
-						$product->redirect('newproduct.php?joined');
 				}
 			}
 
@@ -68,27 +67,27 @@ if(isset($_POST['btn-signup']))
 
           <form method="post" class="form-signin">
               <h2 class="form-signin-heading">Novo Produto</h2><hr />
-<?php
+							<?php
   			if(isset($error))
   			{
   			 	foreach($error as $error)
   			 	{
-?>
+							?>
                        <div class="alert alert-danger">
                           <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $error; ?>
                        </div>
-<?php
+											 <?php
   				}
   			}
   			else if(isset($_GET['joined']))
   			{
-?>
+						?>
                    <div class="alert alert-info">
                         <i class="glyphicon glyphicon-log-in"></i> &nbsp; Cadastro realizado com sucesso <a href='index.php'>Voltar</a>
                    </div>
-<?php
+									 <?php
   			}
-?>
+				?>
               <div class="form-group">
               <input type="text" class="form-control" name="txt_pname" placeholder="Descrição do Produto" value="<?php if(isset($error)){echo $pname;}?>" />
               </div>
