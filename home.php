@@ -45,7 +45,7 @@
       </div>
 </nav>
 
-<div class="tab-content" style="margin-top:80px;">
+<div class="tab-content" style="margin-top:20px;">
 
     <div class="tab-pane active" id="produtos">
 			<div class="embed-responsive embed-responsive-16by9">
@@ -55,14 +55,14 @@
 
 		<div class="tab-pane" id="fornecedores">
 			<div class="embed-responsive embed-responsive-16by9">
-			    <iframe class="embed-responsive-item" src="newprovider.php" allowfullscreen></iframe>
+			    <iframe class="embed-responsive-item" src="providers.php" allowfullscreen></iframe>
 			</div>
 		</p>
 		</div>
 
 		<div class="tab-pane " id="movimentos">
 			<div class="embed-responsive embed-responsive-16by9">
-			    <iframe class="embed-responsive-item" src="newmovement.php" allowfullscreen></iframe>
+			    <iframe class="embed-responsive-item" src="movements.php" allowfullscreen></iframe>
 			</div>
 		</div>
 

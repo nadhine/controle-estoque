@@ -34,17 +34,31 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_registration` varchar(5) NOT NULL,
   `joining_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE = latin1_swedish_ci AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE IF NOT EXISTS `providers` (
+  `provider_id` int(11) NOT NULL AUTO_INCREMENT,
+  `provider_name` varchar(255) NOT NULL,
+  `provider_cnpj` varchar(40) NULL,
+  `provider_firstdate` DATE NULL,
+  `provider_lastdate` DATE NULL,
+  `joining_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`provider_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE = latin1_swedish_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `products` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_name` varchar(255) NOT NULL,
   `product_valor` varchar(40) NOT NULL,
-  `product_unit` varchar(40) NOT NULL,
-  `product_provider` varchar(255) NOT NULL,
+  `product_unit` ENUM('Unidades','Caixas','Quilos','Gramas','Litros','Pacote 500g','Maço','Tablete','Pacote 100g','Pacote 200g','Pacote 250g','Pacote 400g','Pacote 300g','Pacote 60g','Pacote 50g') NOT NULL,
+  `product_provider` int,
   `joining_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`product_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`product_id`)) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE = latin1_swedish_ci AUTO_INCREMENT=1 ;
+
+  ALTER TABLE products
+  ADD FOREIGN KEY (product_provider) REFERENCES providers(provider_id);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

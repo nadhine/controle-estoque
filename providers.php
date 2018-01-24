@@ -1,41 +1,44 @@
 <?php
 session_start();
-require_once('class.product.php');
+require_once('class.provider.php');
 
-$product = new PRODUCT();
+$provider = new PROVIDER();
 
 if(isset($_POST['btn-signup']))
 {
-	$pname = strip_tags($_POST['txt_pname']);
-	$pvalor = strip_tags($_POST['txt_pvalor']);
-	$punit = strip_tags($_POST['txt_punit']);
-	$pprovider = strip_tags($_POST['txt_pprovider']);
+	$vname = strip_tags($_POST['txt_vname']);
+	$vcnpj = strip_tags($_POST['txt_vcnpj']);
+	$vfdate = strip_tags($_POST['txt_vfdate']);
+	$vldate = strip_tags($_POST['txt_vldate']);
 
-	if($pname=="")	{
-		$error[] = "Cadastre uma descrição do produto";
+	if($vname=="")	{
+		$error[] = "Cadastre um nome do fornecedor";
 	}
-	else if($pvalor=="")	{
-		$error[] = "Cadastre um preço!";
+	else if($vcnpj=="")	{
+		$error[] = "Cadastre um CNPJ!";
 	}
-	else if($punit=="")	{
-	    $error[] = 'Por favor selecione uma unidade de medida';
+	else if($vfdate=="")	{
+	    $error[] = 'Cadastre uma data de inicio do contrato';
 	}
-	else if($pprovider=="")	{
-		$error[] = "Cadastre um fornecedor";
+	else if($vldate=="")	{
+		$error[] = "Cadastre uma data de fim do contrato";
 	}
 	else
 	{
 		try
 		{
-			$stmt = $product->runQuery("SELECT product_name, product_valor, product_unit, product_provider FROM products WHERE product_name=:pname");
-			$stmt->execute(array(':pname'=>$pname));
+			$stmt = $provider->runQuery("SELECT provider_name, provider_cnpj, provider_firstdate, provider_lastdate FROM providers WHERE provider_name=:vname OR provider_cnpj=:vcnpj");
+			$stmt->execute(array(':vname'=>$vname, ':vcnpj'=>$vcnpj));
 			$row=$stmt->fetch(PDO::FETCH_ASSOC);
 
-			if($row['product_name']==$pname){
-				$error[] = "Desculpe, esse produto já foi cadastrado";
+			if($row['provider_name']==$vname){
+				$error[] = "Desculpe, esse fornecedor já foi cadastrado";
 			}
+      else if($row['provider_cnpj']==$vcnpj){
+        $error[] = "Desculpe, esse fornecedor já foi cadastrado";
+      }
 			else{
-				if($product->register($pname,$pvalor,$punit,$pprovider)){
+				if($provider->register($vname,$vcnpj,$vfdate,$vldate)){
 				}
 			}
 
@@ -62,7 +65,7 @@ if(isset($_POST['btn-signup']))
 <body>
 	<div class="container">
 	  <!-- Trigger the modal with a button -->
-	  <button type="submit" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-open-file"></i>&nbsp;Novo Produto</button>
+	  <button type="submit" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-open-file"></i>&nbsp;Novo Fornecedor</button>
 	  <!-- Modal -->
 	  <div class="modal fade" id="myModal" role="dialog">
 	    <div class="modal-dialog">
@@ -71,7 +74,7 @@ if(isset($_POST['btn-signup']))
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h2 class="modal-title">Novo Produto</h2>
+	          <h2 class="modal-title">Novo Fornecedor</h2>
 	        </div>
 	        <div class="modal-body">
 						<form method="post">
@@ -97,16 +100,16 @@ if(isset($_POST['btn-signup']))
 					  			}
 									?>
 					              <div class="form-group">
-					              <input type="text" class="form-control" name="txt_pname" placeholder="Descrição do Produto" value="<?php if(isset($error)){echo $pname;}?>" />
+					              <input type="text" class="form-control" name="txt_vname" placeholder="Nome do Fornecedores" value="<?php if(isset($error)){echo $vname;}?>" />
 					              </div>
 					              <div class="form-group">
-					              <input type="text" class="form-control" name="txt_pvalor" placeholder="Preço" value="<?php if(isset($error)){echo $pvalor;}?>" />
+					              <input type="text" class="form-control" name="txt_vcnpj" placeholder="CNPJ" value="<?php if(isset($error)){echo $vcnpj;}?>" />
 					              </div>
 					              <div class="form-group">
-					              	<input type="text" class="form-control" name="txt_punit" placeholder="Unidade" value="<?php if(isset($error)){echo $punit;}?>"/>
+					              	<input type="date" class="form-control" name="txt_vfdate" placeholder="Data do Início do Contrato" value="<?php if(isset($error)){echo $vfdate;}?>"/>
 					              </div>
 					  						<div class="form-group">
-					  						<input type="text" class="form-control" name="txt_pprovider" placeholder="Fornecedor" value="<?php if(isset($error)){echo $pprovider;}?>" />
+					  						<input type="date" class="form-control" name="txt_vldate" placeholder="Data do Término do Contrato" value="<?php if(isset($error)){echo $vldate;}?>" />
 					  						</div>
 					              <div class="clearfix"></div><hr />
 					              <div class="form-group">
@@ -131,29 +134,29 @@ if(isset($_POST['btn-signup']))
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Descrição</th>
-            <th scope="col">Quantidade</th>
-            <th scope="col">unidade</th>
+            <th scope="col">Fornecedor</th>
+            <th scope="col">CNPJ</th>
+            <th scope="col">Fim do Contrato</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th scope="row">1</th>
-            <td>Maça</td>
-            <td>5</td>
-            <td>unidades</td>
+            <td>Extra</td>
+            <td>505154512152</td>
+            <td>15/05/2019</td>
           </tr>
           <tr>
             <th scope="row">2</th>
-            <td>Carne Bovina</td>
-            <td>3</td>
-            <td>Quilos</td>
+            <td>Boi Vivo</td>
+            <td>340864786048478</td>
+            <td>06/10/2020</td>
           </tr>
           <tr>
             <th scope="row">3</th>
-            <td>Uva</td>
-            <td>7</td>
-            <td>caixas</td>
+            <td>Vendinha</td>
+            <td>7846746545564564</td>
+            <td>11/05/2021</td>
           </tr>
         </tbody>
     	</table>
