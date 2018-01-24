@@ -103,7 +103,36 @@ if(isset($_POST['btn-signup']))
 					              <input type="text" class="form-control" name="txt_pvalor" placeholder="Preço" value="<?php if(isset($error)){echo $pvalor;}?>" />
 					              </div>
 					              <div class="form-group">
-					              	<input type="text" class="form-control" name="txt_punit" placeholder="Unidade" value="<?php if(isset($error)){echo $punit;}?>"/>
+												  <select class="form-control" id="sel1">
+														<option name="unit" id="unit_1" value="Unidades">
+															<label for="unit_1">Unidade</label>
+														<option name="unit" id="unit_2" value="Caixas">
+															<label for="unit_2">Caixa</label>
+														<option name="unit" id="unit_3" value="Quilos">
+															<label for="unit_3">Quilo</label>
+														<option name="unit" id="unit_4" value="Gramas">
+															<label for="unit_4">Grama</label>
+														<option name="unit" id="unit_5" value="Litros">
+															<label for="unit_5">Litro</label>
+														<option name="unit" id="unit_6" value="Pacote 500g">
+															<label for="unit_6">Pacote 500g</label>
+														<option name="unit" id="unit_7" value="Maço">
+															<label for="unit_7">Maço</label>
+														<option name="unit" id="unit_8" value="Tablete">
+															<label for="unit_8">Tablete</label>
+														<option name="unit" id="unit_9" value="Pacote 100g">
+															<label for="unit_9">Pacote 100g</label>
+														<option name="unit" id="unit_10" value="Pacote 200g">
+															<label for="unit_10">Pacote 200g</label>
+														<option name="unit" id="unit_11" value="Pacote 250g">
+															<label for="unit_11">Pacote 250g</label>
+														<option name="unit" id="unit_12" value="Pacote 400g">
+															<label for="unit_12">Pacote 400g</label>
+														<option name="unit" id="unit_13" value="Pacote 300g">
+															<label for="unit_13">Pacote 300g</label>
+														<option name="unit" id="unit_14" value="Pacote 60g">
+															<label for="unit_14">Pacote 60g</label>
+												  </select>
 					              </div>
 					  						<div class="form-group">
 					  						<input type="text" class="form-control" name="txt_pprovider" placeholder="Fornecedor" value="<?php if(isset($error)){echo $pprovider;}?>" />
